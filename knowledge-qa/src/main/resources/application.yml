@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: knowledge-qa
+
+  # 数据源配置（PostgreSQL + pgvector）
+  datasource:
+    url: jdbc:postgresql://localhost:5432/knowledge_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  # Spring AI OpenAI 配置
+  ai:
+    openai:
+      api-key: sk-vFFkfuc5Mp4Qg8oU5e7d1fD3505e40719c4eCe0dFdEd4fA1
+      chat:
+        options:
+          model: gpt-4o-mini
+          temperature: 0.7
+      embedding:
+        options:
+          model: text-embedding-3-small
+          dimensions: 1536
+    
+    # Spring AI PgVector Store 配置
+    vectorstore:
+      pgvector:
+        # 表名
+        table-name: knowledge_vector
+        # 向量列名
+        embedding-column-name: embedding
+        # 内容列名
+        content-column-name: content
+        # 元数据列名
+        metadata-column-name: metadata
+        # 距离类型：COSINE_DISTANCE（余弦距离）
+        distance-type: COSINE_DISTANCE
+        # 是否删除已存在的表（false = 不删除，使用现有表）
+        remove-existing-vector-store-table: false
+
+# 服务器配置
+server:
+  port: 8070
+
+# 日志配置
+logging:
+  level:
+    com.example.knowledgeqa: DEBUG
+    org.springframework.ai: INFO
+
