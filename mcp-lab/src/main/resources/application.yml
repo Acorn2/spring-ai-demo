@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: mcp-lab
+  
+  # 通义千问 (Qwen) 模型配置
+  ai:
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY}
+      chat:
+        options:
+          model: qwen-max # 推荐使用 qwen-max 以获得更好的工具调用稳定性
+
+server:
+  port: 8081
+
+logging:
+  level:
+    com.example.mcplab: debug
+    org.springframework.ai: debug
